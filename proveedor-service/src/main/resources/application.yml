@@ -1,0 +1,9 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://database-1.ckbmcaom0bdy.us-east-1.rds.amazonaws.com:5432/postgres?sslMode=require
+    username: postgres
+    password: dbAdm0925
+  application:
+    name: proveedor
+server:
+  port: 8080
