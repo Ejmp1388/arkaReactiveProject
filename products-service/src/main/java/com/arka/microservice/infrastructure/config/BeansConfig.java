@@ -1,8 +1,6 @@
 package com.arka.microservice.infrastructure.config;
 
-import com.arka.microservice.application.usecase.CreateProductUseCase;
-import com.arka.microservice.application.usecase.GetProductByIdUseCase;
-import com.arka.microservice.application.usecase.ListProductUseCase;
+import com.arka.microservice.application.usecase.*;
 import com.arka.microservice.domain.port.ProductRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,5 +22,15 @@ public class BeansConfig {
     @Bean
     public CreateProductUseCase createProductUseCase(ProductRepositoryPort port){
         return new CreateProductUseCase(port);
+    }
+
+    @Bean
+    public UpdateProductUseCase updateProductUseCase(ProductRepositoryPort port){
+        return new UpdateProductUseCase(port);
+    }
+
+    @Bean
+    public DeleteProductUseCase deleteProductUseCase(ProductRepositoryPort port){
+        return new DeleteProductUseCase(port);
     }
 }

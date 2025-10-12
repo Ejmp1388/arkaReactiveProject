@@ -20,6 +20,11 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
+    public Mono<Product> update(Product product) {
+        return productMongoRepository.save(toDocument(product)).map(this::toDomain);
+    }
+
+    @Override
     public Mono<Product> findById(String id) {
         return productMongoRepository.findById(id).map(this::toDomain);
     }
@@ -28,6 +33,11 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     public Flux<Product> findAllActive() {
         return productMongoRepository.findByActiveTrue()
                 .map(this::toDomain);
+    }
+
+    @Override
+    public Mono<Void> deleteById(String id) {
+        return productMongoRepository.deleteById(id);
     }
 
     @Override
@@ -40,8 +50,8 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
                 .id(d.getId())
                 .name(d.getName())
                 .description(d.getDescription())
-                .brandId(d.getBrandId())
-                .categoryId(d.getCategoryId())
+                .brand(d.getBrand())
+                .categories(d.getCategories())
                 .images(d.getImages())
                 .attributes(d.getAttributes())
                 .price(d.getPrice())
@@ -54,8 +64,8 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
         d.setId(p.getId());
         d.setName(p.getName());
         d.setDescription(p.getDescription());
-        d.setBrandId(p.getBrandId());
-        d.setCategoryId(p.getCategoryId());
+        d.setBrand(p.getBrand());
+        d.setCategories(p.getCategories());
         d.setImages(p.getImages());
         d.setAttributes(p.getAttributes());
         d.setPrice(p.getPrice());

@@ -6,15 +6,10 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class UpdateProductUseCase {
+public class DeleteProductUseCase {
     private final ProductRepositoryPort repository;
 
-    public Mono<Product> updateProducto(Product prod) {
-        return repository.findById(prod.getId())
-                .flatMap(existe->{
-                    prod.setId(existe.getId());
-                    return repository.update(prod);
-                });
+    public Mono<Void> delete(String id) {
+        return repository.deleteById(id);
     }
 }
-
