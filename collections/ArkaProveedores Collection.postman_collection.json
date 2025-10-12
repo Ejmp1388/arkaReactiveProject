@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "f555756c-0660-44ed-bb1d-e24fecffcd24",
+		"name": "Arka Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23179104",
+		"_collection_link": "https://restless-comet-99221.postman.co/workspace/Colecturia-PIC~76bd7bd8-31b5-47d1-b29e-a1b6904adc97/collection/23179104-f555756c-0660-44ed-bb1d-e24fecffcd24?action=share&source=collection_link&creator=23179104"
+	},
+	"item": [
+		{
+			"name": "proveedor-arka",
+			"item": [
+				{
+					"name": "save proveedor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"CORPORACION FAVORITA C.A.\",\r\n    \"type\": \"JUR\",\r\n    \"identification\": \"0911-080850-106-3\",\r\n    \"address\": \"Colonia Escalon No 3, San Salvador\",\r\n    \"contact\": \"7777-8585\",\r\n    \"email\": \"corpfavorita@gmail.com\",\r\n    \"status\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/proveedores/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proveedores",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get proveedor by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/proveedores/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proveedores",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all proveedores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/proveedores/getall",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proveedores",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save compra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"compraProveedor\": {\r\n    \"idProveedor\": 859,\r\n    \"purcharseDate\": \"2025-10-10T23:41:00\",\r\n    \"status\": \"RECIBIDO\",\r\n    \"total\": 60.80\r\n  },\r\n  \"compraDetalles\": [\r\n    {\r\n      \"idProduct\": 985,\r\n      \"quantity\": 2,\r\n      \"unitPrice\": 30.00\r\n    },\r\n    {\r\n      \"idProduct\": 855,\r\n      \"quantity\": 1,\r\n      \"unitPrice\": 0.80\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/compras/savecompra",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"savecompra"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
