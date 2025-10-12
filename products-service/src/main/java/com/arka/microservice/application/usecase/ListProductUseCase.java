@@ -9,7 +9,11 @@ import reactor.core.publisher.Flux;
 public class ListProductUseCase {
     private final ProductRepositoryPort repository;
 
-    public Flux<Product> execute() {
+    public Flux<Product> allActive() {
+        return repository.findAllActive();
+    }
+
+    public Flux<Product> showAll() {
         return repository.findAll();
     }
 }

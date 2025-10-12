@@ -25,6 +25,12 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
+    public Flux<Product> findAllActive() {
+        return productMongoRepository.findByActiveTrue()
+                .map(this::toDomain);
+    }
+
+    @Override
     public Flux<Product> findAll() {
         return productMongoRepository.findAll().map(this::toDomain);
     }

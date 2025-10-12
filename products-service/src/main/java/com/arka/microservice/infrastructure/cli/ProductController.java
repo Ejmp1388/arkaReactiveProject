@@ -28,8 +28,13 @@ public class ProductController {
         return getProductByIdUseCase.findProductById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/showAll")
     public Flux<Product> list() {
-        return listProductUseCase.execute();
+        return listProductUseCase.showAll();
+    }
+
+    @GetMapping("/allActive")
+    public Flux<Product> lista() {
+        return listProductUseCase.allActive();
     }
 }
