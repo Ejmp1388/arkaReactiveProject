@@ -3,9 +3,13 @@ package com.arka.microservice.infrastructure.cli;
 import com.arka.microservice.application.usecase.*;
 import com.arka.microservice.domain.model.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
@@ -19,13 +23,25 @@ public class ProductController {
 
 
     @PostMapping("/create")
-    public Mono<Product> create(@RequestBody Product product) {
-        return createProductUseCase.createProduct(product);
+    public Mono<ResponseEntity<Map<String, Object>>> create(@RequestBody Product product) {
+        return createProductUseCase.createProduct(product)
+                .map(saved -> ResponseEntity.status(HttpStatus.CREATED)
+                        .body(Map.of(
+                                "status", HttpStatus.CREATED.value(),
+                                "message", "Producto registrado exitosamente",
+                                "id", saved.getId()
+                        )));
     }
 
     @PostMapping("/update")
-    public Mono<Product> update(@RequestBody Product product) {
-        return updateProductUseCase.updateProducto(product);
+    public Mono<ResponseEntity<Map<String, Object>>> update(@RequestBody Product product) {
+        return updateProductUseCase.updateProducto(product)
+                .map(saved -> ResponseEntity.status(HttpStatus.OK)
+                .body(Map.of(
+                        "status", HttpStatus.OK.value(),
+                        "message", "Producto actualizado exitosamente",
+                        "id", saved.getId()
+                )));
     }
 
     @GetMapping("/{id}")
