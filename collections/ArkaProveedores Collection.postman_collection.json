@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "e936fe1a-b2bd-4d6b-add8-5001f5ef673d",
+		"_postman_id": "f555756c-0660-44ed-bb1d-e24fecffcd24",
 		"name": "Arka Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "2211927"
+		"_exporter_id": "23179104",
+		"_collection_link": "https://restless-comet-99221.postman.co/workspace/Colecturia-PIC~76bd7bd8-31b5-47d1-b29e-a1b6904adc97/collection/23179104-f555756c-0660-44ed-bb1d-e24fecffcd24?action=share&source=collection_link&creator=23179104"
 	},
 	"item": [
 		{
@@ -16,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"CORPORACION FAVORITA C.A.\",\r\n    \"type\": \"JUR\",\r\n    \"identification\": \"0911-080850-106-3\",\r\n    \"address\": \"Colonia Escalon No 3, San Salvador\",\r\n    \"contact\": \"7777-8585\",\r\n    \"email\": \"corpfavorita@gmail.com\",\r\n    \"status\": \"A\"\r\n}",
+							"raw": "{\r\n    \"name\": \"CORPORACION FAVORITA C.A.\",\r\n    \"type\": \"JUR\",\r\n    \"identification\": \"0911-080850-106-3\",\r\n    \"address\": \"Colonia Escalon No 3, San Salvador\",\r\n    \"contact\": \"7777-8585\",\r\n    \"email\": \"corpfavorita@gmail.com\",\r\n    \"active\": true,\r\n    \"createdAt\": \"2025-10-15T22:30:00\",\r\n    \"updatedAt\": \"2025-10-15T22:30:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,174 +103,6 @@
 								"api",
 								"compras",
 								"savecompra"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "productos-arka",
-			"item": [
-				{
-					"name": "Crear producto",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Regleta\",\r\n  \"description\": \"permite conectar varios aparatos\",\r\n  \"brand\": \"pretul\",\r\n  \"categories\": [\"Periféricos\", \"Electricidad\"],\r\n  \"images\": [\"img5.jpg\", \"img6.jpg\"],\r\n  \"attributes\": {\r\n    \"color\": \"Negro\",\r\n    \"dpi\": 16000,\r\n    \"conectivity\": \"Cable\"\r\n  },\r\n  \"price\": {\r\n    \"COP\": 58000,\r\n    \"USD\": 15\r\n  },\r\n  \"active\": true\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/products/create",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar producto",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "    {\r\n        \"id\": \"68eb4b13dcfbb68ad2575365\",\r\n        \"name\": \"Regleta\",\r\n        \"description\": \"permite conectar varios aparatos\",\r\n        \"brand\": \"pretul\",\r\n        \"categories\": [\r\n            \"Periféricos\",\r\n            \"Electricidad\"\r\n        ],\r\n        \"images\": [\r\n            \"img5.jpg\",\r\n            \"img6.jpg\"\r\n        ],\r\n        \"attributes\": {\r\n            \"color\": \"Negro\",\r\n            \"dpi\": 16000,\r\n            \"conectivity\": \"Cable\"\r\n        },\r\n        \"price\": {\r\n            \"COP\": 58000.0,\r\n            \"USD\": 15.0\r\n        },\r\n        \"active\": true\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/products/update",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"update"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Lista Productos Activos",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/products/allActive",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"allActive"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "EliminaProducto",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/products/delete/68db645bfaad01bd312c602d",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"delete",
-								"68db645bfaad01bd312c602d"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Lista todos los Productos",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/products/showAll",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"showAll"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Producto by Id",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/products/68eb4b13dcfbb68ad2575365",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"products",
-								"68eb4b13dcfbb68ad2575365"
 							]
 						}
 					},
