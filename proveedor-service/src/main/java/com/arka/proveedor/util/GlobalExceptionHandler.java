@@ -22,9 +22,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(response);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleGeneralErrors(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("mensaje", "Error interno", "detalle", ex.getMessage()));
-    }
+    //@ExceptionHandler(Exception.class)
+    //public ResponseEntity<Map<String, String>> handleGeneralErrors(Exception ex) {
+    //    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    //            .body(Map.of("mensaje", "Error interno", "detalle", ex.getMessage()));
+    //}
 }
