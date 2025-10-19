@@ -10,16 +10,17 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 
-@Table("compra_detalle")
+@Table("purchase_detail")
 @Getter
 @Setter
 public class CompraDetalle {
     @Id
-    private Long id;
-    private Long idPurcharse;
+    private String id;
 
-    @NotNull(message = "El id_product es obligatorio")
-    private Integer idProduct;
+    private String purchaseId;
+
+    @NotNull(message = "El Id de producto es obligatorio")
+    private String productId;
 
     @NotNull(message = "La cantidad es obligatoria")
     @Min(value = 1, message = "La cantidad debe ser al menos 1")

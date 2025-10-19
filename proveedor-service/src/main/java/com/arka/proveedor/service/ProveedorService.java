@@ -17,7 +17,6 @@ public class ProveedorService {
     private final ProveedorRepository proveedorRepository;
 
     public Mono<Proveedor> saveProveedor(Proveedor proveedor){
-        proveedor.setId(UUID.randomUUID().toString());
         proveedor.setCreatedAt(LocalDateTime.now());
         proveedor.setUpdatedAt(LocalDateTime.now());
         return proveedorRepository.save(proveedor);
