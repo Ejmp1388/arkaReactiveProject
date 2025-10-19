@@ -86,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"compraProveedor\": {\r\n    \"idProveedor\": 859,\r\n    \"purcharseDate\": \"2025-10-10T23:41:00\",\r\n    \"status\": \"RECIBIDO\",\r\n    \"total\": 60.80\r\n  },\r\n  \"compraDetalles\": [\r\n    {\r\n      \"idProduct\": 985,\r\n      \"quantity\": 2,\r\n      \"unitPrice\": 30.00\r\n    },\r\n    {\r\n      \"idProduct\": 855,\r\n      \"quantity\": 1,\r\n      \"unitPrice\": 0.80\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"compraProveedor\": {\r\n    \"supplierId\": \"d9464c39-346e-4a95-a791-d2104bd181d2\",\r\n    \"active\": true \r\n  },\r\n  \"compraDetalles\": [\r\n    {\r\n      \"productId\": \"44e92a3d-5013-4c28-b664-5b1f9695857f\",\r\n      \"quantity\": 50,\r\n      \"unitPrice\": 1.20\r\n    },\r\n    {\r\n      \"productId\": \"4f6683ae-ab0f-454e-aa09-0ba6003e9ef9\",\r\n      \"quantity\": 30,\r\n      \"unitPrice\": 0.20\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -103,6 +103,95 @@
 								"api",
 								"compras",
 								"savecompra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update detalle compra",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"productId\": \"1c83c069-22a6-47dd-9935-fe15bd1f2315\",\r\n      \"quantity\": 9,\r\n      \"unitPrice\": 1.75\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/compras/detail/41fff15c-2d5b-4b96-b9e8-0970e51f589a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"detail",
+								"41fff15c-2d5b-4b96-b9e8-0970e51f589a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete detalle compra",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/compras/detail/48f87db9-f9b0-4a45-af53-c6cb2c072877",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"detail",
+								"48f87db9-f9b0-4a45-af53-c6cb2c072877"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add detalle compra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"purchaseId\": \"47d14daf-a351-4938-9f9e-2e2e9847e54e\",\r\n    \"productId\": \"736b88c8-ebc9-470d-9960-0d6443be520c\",\r\n    \"quantity\": 7,\r\n    \"unitPrice\": 23.50\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/compras/details",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"details"
 							]
 						}
 					},
