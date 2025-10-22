@@ -42,9 +42,16 @@ public class InventoryController {
                     return  ResponseEntity.status(HttpStatus.CREATED).body(body);
                 })
                 .onErrorResume(ex -> {
+                    String errorMessage;
+                    // Detecta si es un error de clave duplicada
+                    if (ex.getMessage() != null && ex.getMessage().contains("duplicate key value")) {
+                        errorMessage = "Ya existe un inventario para este producto en el almacén especificado.";
+                    } else {
+                        errorMessage = ex.getMessage();
+                    }
                     Map<String, Object> errorBody = Map.of(
                             "status", 400,
-                            "error", ex.getMessage()
+                            "error", errorMessage
                     );
                     return Mono.just(ResponseEntity.badRequest().body(errorBody));
                 });
