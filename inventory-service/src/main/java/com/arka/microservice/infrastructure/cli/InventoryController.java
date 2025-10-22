@@ -8,6 +8,7 @@ import com.arka.microservice.application.usecase.*;
 import com.arka.microservice.domain.model.Inventory;
 import com.arka.microservice.infrastructure.cli.dto.UpdateStockRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -32,15 +33,21 @@ public class InventoryController {
     @PostMapping("/create")
     public Mono<ResponseEntity<Map<String, Object>>> createInventory(@RequestBody Inventory inventory) {
         return createInventoryUseCase.createInventory(inventory)
-                .map(i -> ResponseEntity.ok(Map.of(
-                        "status", 201,
-                        "message", "Inventory created",
-                        "inventoryId", i.getInventoryId()
-                )));
-//                .onErrorResume(ex -> Mono.just(ResponseEntity.badRequest().body(Map.of(
-//                        "status", 400,
-//                        "error", ex.getMessage()
-//                ))));
+                .map(i -> {
+                    Map<String, Object> body = Map.of(
+                            "status", 201,
+                            "message", "Inventario Creado correctamente",
+                            "inventoryId", i.getInventoryId()
+                    );
+                    return  ResponseEntity.status(HttpStatus.CREATED).body(body);
+                })
+                .onErrorResume(ex -> {
+                    Map<String, Object> errorBody = Map.of(
+                            "status", 400,
+                            "error", ex.getMessage()
+                    );
+                    return Mono.just(ResponseEntity.badRequest().body(errorBody));
+                });
     }
 
     @PostMapping("/update")
@@ -56,7 +63,7 @@ public class InventoryController {
                         "new Stock", i
                 )))
                 .onErrorResume(ex -> Mono.just(ResponseEntity.badRequest().body(Map.of(
-                        "status", 401,
+                        "status", 400,
                         "error", ex.getMessage()
                 ))));
     }
