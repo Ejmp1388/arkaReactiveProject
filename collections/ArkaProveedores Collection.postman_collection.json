@@ -198,6 +198,52 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "reporte-low-stock",
+			"item": [
+				{
+					"name": "low-stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/reporte/low-stock",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"reporte",
+								"low-stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "low-stock export",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/reporte/low-stock/export",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"reporte",
+								"low-stock",
+								"export"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
