@@ -1,0 +1,4 @@
+inventory_id,product_id,warehouse_id,warehouse_name,available_quantity,reservered_quantity,minimum_quantity,updated_at
+6f7cbf3e-5b1c-4cf4-bf1f-4bf161ac320f,68eb4b13dcfbb68ad2575365,31dd5c63-86fa-49a3-ae77-c55f203dec4b,Central Warehouse,7,0,8,2025-10-19T23:23:57.477299
+d133f470-e0a1-4842-a4b2-7e80e2dde343,68ec59d57c4e550b8fe78c43,7291c125-e55c-41e8-8acd-0183ce9fd1ce,Central Warehouse,45,0,50,2025-10-22T18:21:58.707694
+e0908076-ee37-4782-be51-a41316bac3f7,68eb60791d134320a25f9a83,31dd5c63-86fa-49a3-ae77-c55f203dec4b,Central Warehouse,5,0,7,2025-10-19T22:19:43.773350

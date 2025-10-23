@@ -1,0 +1,13 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://database-1.ckbmcaom0bdy.us-east-1.rds.amazonaws.com:5432/arka?sslMode=require
+    username: postgres
+    password: dbAdm0925
+  application:
+    name: reporte
+server:
+  port: 8081
+inventory:
+  report:
+    interval: 300000 # cada 5 minutos en milisegundos
+
