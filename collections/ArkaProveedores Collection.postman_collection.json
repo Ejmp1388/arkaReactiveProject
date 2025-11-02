@@ -244,6 +244,52 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "reporte-ventas-semanal",
+			"item": [
+				{
+					"name": "ventas-semanal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/api/reporte/semanal",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"reporte",
+								"semanal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ventas-semanal export",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/api/reporte/semanal/csv",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"reporte",
+								"semanal",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
