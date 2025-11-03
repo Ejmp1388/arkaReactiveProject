@@ -1,6 +1,6 @@
 spring:
   data:
     mongodb:
-      uri: ${MONGODB_URI:mongodb://localhost:27017/arka_products}
+      uri: ${MONGODB_URI:mongodb://3.137.203.102:27017/arka_products}
 server:
   port: 8080
