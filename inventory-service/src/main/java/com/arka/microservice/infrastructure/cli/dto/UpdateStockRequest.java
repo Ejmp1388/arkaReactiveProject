@@ -9,6 +9,6 @@ public class UpdateStockRequest {
     private String productId;
     private String warehouseId;
     private int quantity;
-    private String type; // INCREASE, DECREASE, RESERVE, RELEASE
+    private String type; // INCREASE, DECREASE, RESERVE, RELEASE,()
     private String note;
 }
