@@ -67,5 +67,5 @@ public class CreateInventoryUseCaseTest {
                 .expectErrorMatches(e -> e instanceof IllegalArgumentException &&
                         e.getMessage().equals("El Id del producto no puede ser nulo o vacío."))
                 .verify();
-    }
+    }//
 }
