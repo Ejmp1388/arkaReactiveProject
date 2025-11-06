@@ -1,0 +1,53 @@
+name: Deploy Report Sales
+
+on:
+  push:
+    branches: [main]
+    paths: ['reporte-ventas/**']
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: reporte-ventas
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Make mvnw executable
+      run: chmod +x mvnw
+
+    - name: Build JAR
+      run: ./mvnw clean package -DskipTests
+
+    - name: Set version
+      id: version
+      run: echo "VERSION=$(date +%Y%m%d)-${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: |
+        docker build --build-arg JAR_FILE=target/reporte-ventas-*.jar \
+          -t ${{ secrets.DOCKER_USERNAME }}/reporte-ventas:${{ steps.version.outputs.VERSION }} \
+          -t ${{ secrets.DOCKER_USERNAME }}/reporte-ventas:latest .
+
+    - name: Push Docker image
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/reporte-ventas:${{ steps.version.outputs.VERSION }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/reporte-ventas:latest
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.EC2_HOST_2 }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_KEY }}
+        script: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/reporte-ventas:latest
+          docker stop reporte-ventas || true
+          docker rm reporte-ventas || true
+          docker run -d --name reporte-ventas -p 8091:8091 ${{ secrets.DOCKER_USERNAME }}/reporte-ventas:latest
