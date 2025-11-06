@@ -43,7 +43,7 @@ public class InventoryController {
                 })
                 .onErrorResume(ex -> {
                     String errorMessage;
-                    // Detecta si es un error de clave duplicada.
+                    // Detecta si es un error de clave duplicada
                     if (ex.getMessage() != null && ex.getMessage().contains("duplicate key value")) {
                         errorMessage = "Ya existe un inventario para este producto en el almacén especificado.";
                     } else {
