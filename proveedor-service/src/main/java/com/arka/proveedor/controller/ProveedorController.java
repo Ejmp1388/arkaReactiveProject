@@ -5,6 +5,7 @@ import com.arka.proveedor.service.ProveedorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -42,5 +43,10 @@ public class ProveedorController {
     @PutMapping(value = "/{id}")
     public Mono<Proveedor> updateById(@PathVariable("id") String id, @RequestBody Proveedor proveedor){
         return proveedorService.updateById(id, proveedor);
+    }
+
+    @GetMapping(value = "/healthz")
+    public ResponseEntity<Void> healthCheck(){
+        return ResponseEntity.ok().build();
     }
 }

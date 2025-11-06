@@ -51,4 +51,9 @@ public class CompraController {
         return compraService.eliminarDetalle(id)
                 .map((ResponseEntity::ok));
     }
+
+    @GetMapping(value = "/healthz")
+    public ResponseEntity<Void> healthCheck(){
+        return ResponseEntity.ok().build();
+    }
 }
