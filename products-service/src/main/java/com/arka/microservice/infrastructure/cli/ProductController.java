@@ -63,4 +63,9 @@ public class ProductController {
     public Mono<Void> delete(@PathVariable String id){
        return  deleteProductUseCase.delete(id);
     }
+
+    @GetMapping("/healthz")
+    public ResponseEntity<Void> healthCheck(){
+        return ResponseEntity.ok().build();
+    }
 }
