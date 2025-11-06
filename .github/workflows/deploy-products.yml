@@ -50,4 +50,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/products-service:latest
           docker stop products-service || true
           docker rm products-service || true
-          docker run -d --name products-service -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/products-service:latest
+          docker run -d --name products-service -p 8087:8087 ${{ secrets.DOCKER_USERNAME }}/products-service:latest
