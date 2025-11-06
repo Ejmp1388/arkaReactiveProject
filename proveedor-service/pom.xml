@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.arka</groupId>
-	<artifactId>proveedor</artifactId>
+	<artifactId>proveedor-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>proveedor</name>
+	<name>proveedor-service</name>
 	<description>Microservicio de Proveedores</description>
 	<url/>
 	<licenses>
