@@ -86,12 +86,12 @@ public class UpdateStockListUseCase {
                 afterAvailable = beforeAvailable + request.getQuantity();
                 afterReserved = beforeReserved - request.getQuantity();
                 break;
-//            case "RELEASER":
-//                if (beforeReserved < request.getQuantity()) {
-//                    return Mono.error(new IllegalArgumentException("No hay suficiente reserva para liberar"));
-//                }
-//                afterReserved = beforeReserved - request.getQuantity();
-//                break;
+            case "OUTRESERVE":
+                if (beforeReserved < request.getQuantity()) {
+                    return Mono.error(new IllegalArgumentException("No hay suficiente reserva para liberar"));
+                }
+                afterReserved = beforeReserved - request.getQuantity();
+                break;
             default:
                 return Mono.error(new IllegalArgumentException("El tipo es inválido, favor ingrese un valor correcto"));
         }
