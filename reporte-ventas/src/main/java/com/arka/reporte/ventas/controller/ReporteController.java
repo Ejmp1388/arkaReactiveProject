@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/reporte")
+@RequestMapping("/api/rptsemanal")
 public class ReporteController {
 
     private final ReporteService reporteService;
