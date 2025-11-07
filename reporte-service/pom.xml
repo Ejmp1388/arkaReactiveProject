@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.arka</groupId>
-	<artifactId>reporte</artifactId>
+	<artifactId>reporte-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>reporte</name>
+	<name>reporte-service</name>
 	<description>Reporte</description>
 	<url/>
 	<licenses>

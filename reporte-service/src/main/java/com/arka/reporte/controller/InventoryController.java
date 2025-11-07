@@ -45,4 +45,9 @@ public class InventoryController {
                 });
     }
 
+    @GetMapping(value = "/healthz")
+    public ResponseEntity<Void> healthCheck(){
+        return ResponseEntity.ok().build();
+    }
+
 }
