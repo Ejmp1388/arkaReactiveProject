@@ -104,7 +104,7 @@ public class InventoryController {
         return getStockAvailabilityUseCase.getStockAvailability(request);
     }
 
-    @GetMapping("healthz")
+    @GetMapping("/healthz")
     public ResponseEntity<Void> healthCheck(){
         return ResponseEntity.ok().build();
     }
