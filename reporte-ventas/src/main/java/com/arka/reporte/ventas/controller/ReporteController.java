@@ -48,4 +48,9 @@ public class ReporteController {
                             .body(resource);
                 });
     }
+
+    @GetMapping(value = "/healthz")
+    public ResponseEntity<Void> healthCheck(){
+        return ResponseEntity.ok().build();
+    }
 }
