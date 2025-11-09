@@ -50,4 +50,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/inventory-service:latest
           docker stop inventory-service || true
           docker rm inventory-service || true
-          docker run -d --name inventory-service -p 8086:8086 ${{ secrets.DOCKER_USERNAME }}/inventory-service:latest
+          docker run -d --name inventory-service --network arka-network -e R2DBC_URL=${{ secrets.DB_URL }} -e R2DBC_USERNAME=${{ secrets.DB_USER }} -e R2DBC_PASSWORD=${{ secrets.DB_PASS }} -p 8086:8086 ${{ secrets.DOCKER_USERNAME }}/inventory-service:latest

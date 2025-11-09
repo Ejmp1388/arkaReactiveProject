@@ -1,18 +1,23 @@
 package com.arka.microservice.application.usecase;
 
 import com.arka.microservice.domain.model.Inventory;
+import com.arka.microservice.domain.model.Product;
 import com.arka.microservice.domain.model.StockHistory;
 import com.arka.microservice.domain.port.InventoryRepositoryPort;
+import com.arka.microservice.domain.port.ProductClientPort;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 public class CreateInventoryUseCase {
     private final InventoryRepositoryPort repository;
+    private final ProductClientPort productClientPort;
 
     public Mono<Inventory> createInventory(Inventory inventory) {
         return Mono.defer(() -> validate(inventory))
-                .flatMap(this::saveInventoryWithHistory);
+                .flatMap(inv->verifyProductExists(inv.getProductId())
+                        .then(saveInventoryWithHistory(inv))
+                );
     }
 
 
@@ -41,6 +46,12 @@ public class CreateInventoryUseCase {
 
 
         return Mono.just(inv);
+    }
+
+    private Mono<Product> verifyProductExists(String productId) {
+        return productClientPort.getProductById(productId)
+                .switchIfEmpty(Mono.error(new IllegalArgumentException("El producto con id " + productId + " no existe.")))
+                .onErrorMap(ex -> new IllegalArgumentException("Error al validar el producto: " + ex.getMessage(), ex));
     }
 
     private Mono<Inventory> saveInventoryWithHistory(Inventory inventory) {
