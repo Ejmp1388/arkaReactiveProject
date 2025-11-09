@@ -41,6 +41,16 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
+    public Mono<Boolean> existsByName(String name) {
+        return productMongoRepository.existsByName(name);
+    }
+
+    @Override
+    public Mono<Product> findByName(String name) {
+        return productMongoRepository.findByName(name).map(this::toDomain);
+    }
+
+    @Override
     public Flux<Product> findAll() {
         return productMongoRepository.findAll().map(this::toDomain);
     }
@@ -54,6 +64,7 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
                 .categories(d.getCategories())
                 .images(d.getImages())
                 .attributes(d.getAttributes())
+                .currency(d.getCurrency())
                 .price(d.getPrice())
                 .active(d.isActive())
                 .build();
@@ -68,6 +79,7 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
         d.setCategories(p.getCategories());
         d.setImages(p.getImages());
         d.setAttributes(p.getAttributes());
+        d.setCurrency(p.getCurrency());
         d.setPrice(p.getPrice());
         d.setActive(p.isActive());
         return d;

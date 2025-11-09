@@ -18,10 +18,10 @@ public class ProductValidator {
         if (product.getCategories() == null || product.getCategories().isEmpty()) {
             return Mono.error(new IllegalArgumentException("Debe especificar al menos una categoría"));
         }
-        if (product.getPrice() == null || product.getPrice().isEmpty()) {
-            return Mono.error(new IllegalArgumentException("Debe incluir precios en al menos una moneda"));
-        }
-        if (!product.getPrice().containsKey("USD")) {
+//        if (product.getPrice() == null || product.getPrice().isEmpty()) {
+//            return Mono.error(new IllegalArgumentException("Debe incluir precios en al menos una moneda"));
+//        }
+        if (!product.getCurrency().equals("USD")) {
             return Mono.error(new IllegalArgumentException("El precio en USD es obligatorio"));
         }
 

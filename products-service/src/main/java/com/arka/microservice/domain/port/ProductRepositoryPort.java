@@ -11,4 +11,6 @@ public interface ProductRepositoryPort {
     Flux<Product> findAll();
     Flux<Product> findAllActive();
     Mono<Void> deleteById(String id);//busca los productos que esten ativos
+    Mono<Boolean> existsByName(String name);
+    Mono<Product> findByName(String name);
 }

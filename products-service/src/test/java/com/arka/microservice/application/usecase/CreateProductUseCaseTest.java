@@ -35,12 +35,15 @@ public class CreateProductUseCaseTest {
         product.setCategories(List.of("Periféricos"));
         product.setImages(List.of("img1.jpg", "img2.jpg"));
         product.setAttributes(Map.of("color", "Negro", "dpi", 16000));
-        product.setPrice(Map.of("COP", 80000.0, "USD", 20.0));
+        product.setCurrency("USD");
+        product.setPrice(20.0);
         product.setActive(true);
     }
 
     @Test
     void shouldCreateProductSuccessfully() {
+        when(repositoryPort.existsByName("Mouse Mejorado"))
+                .thenReturn(Mono.just(false));
         when(repositoryPort.save(any(Product.class))).thenReturn(Mono.just(product));
 
         Mono<Product> result = createProductUseCase.createProduct(product);
