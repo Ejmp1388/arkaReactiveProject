@@ -1,5 +1,6 @@
 package com.arka.proveedor.service;
 
+import com.arka.proveedor.dto.InventoryUpdateRequest;
 import com.arka.proveedor.entity.CompraDetalle;
 import com.arka.proveedor.entity.CompraProveedor;
 import com.arka.proveedor.model.CompraRequest;
@@ -7,8 +8,11 @@ import com.arka.proveedor.model.CompraResponse;
 import com.arka.proveedor.repository.CompraDetalleRepository;
 import com.arka.proveedor.repository.CompraProveedorRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,9 +25,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CompraService {
+    private static final Logger log = LoggerFactory.getLogger(CompraService.class);
 
     private final CompraProveedorRepository compraProveedorRepository;
     private final CompraDetalleRepository compraDetalleRepository;
+    private final WebClient.Builder webClientBuilder;
 
     public Mono<CompraResponse> registrarCompra(CompraRequest request) {
         CompraProveedor compraProveedor = request.getCompraProveedor();
@@ -47,13 +53,37 @@ public class CompraService {
                                 compra.setTotal(total);
                                 compra.setUpdatedAt(LocalDateTime.now());
 
-                                return compraProveedorRepository.save(compra)
+                                WebClient webClient = webClientBuilder
+                                        .baseUrl("http://alb-if-arka-1265771644.us-east-1.elb.amazonaws.com")
+                                        .build();
+
+                                // Llamadas al endpoint de inventory por cada detalle; errores no bloquean el flujo
+                                return Flux.fromIterable(savedDetalles)
+                                        .flatMap(det -> {
+                                            InventoryUpdateRequest req = new InventoryUpdateRequest(
+                                                    det.getProductId(),
+                                                    "31dd5c63-86fa-49a3-ae77-c55f203dec4b",
+                                                    det.getQuantity(),
+                                                    "INCREASE",
+                                                    "Incremento " + det.getQuantity() + " mas"
+                                            );
+
+                                            return webClient.post()
+                                                    .uri("/api/inventory/update")
+                                                    .bodyValue(req)
+                                                    .retrieve()
+                                                    .bodyToMono(Void.class)
+                                                    .doOnError(e -> log.warn("Error actualizando inventario para productId {}: {}", det.getProductId(), e.getMessage()))
+                                                    .onErrorResume(e -> Mono.empty());
+                                        })
+
+                                        .then(compraProveedorRepository.save(compra)
                                         .map(s -> {
                                             CompraResponse response = new CompraResponse();
                                             response.setCompraProveedor(s);
                                             response.setCompraDetalles(savedDetalles);
                                             return response;
-                                        });
+                                        }));
                             });
 
 
