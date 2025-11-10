@@ -9,5 +9,12 @@ server:
   port: 8090
 inventory:
   report:
-    interval: 300000 # cada 5 minutos en milisegundos
+    interval: 86400000  # cada 1 Dias en milisegundos
+reportProperties:
+  weeklyCron: "0 0 0 * * *"
+cloud:
+  aws:
+    credentials:
+        access-key: ${ACCESS_KEY}
+        secret-key: ${SECRET_KEY}
 
