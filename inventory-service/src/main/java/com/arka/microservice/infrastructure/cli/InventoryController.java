@@ -6,6 +6,7 @@ import com.arka.microservice.application.dto.StockAvailabilityRequestDTO;
 import com.arka.microservice.application.dto.StockUpdateRequest;
 import com.arka.microservice.application.usecase.*;
 import com.arka.microservice.domain.model.Inventory;
+import com.arka.microservice.domain.model.Warehouse;
 import com.arka.microservice.infrastructure.cli.dto.UpdateStockRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class InventoryController {
     private final GetInventoryUseCase getInventoryUseCase;
     private final GetInventoryAvailabilityUseCase getInventoryAvailabilityUseCase;
     private final GetStockAvailabilityUseCase getStockAvailabilityUseCase;
+    private final GetWarehouseUseCase getWarehouseUseCase;
 
     @PostMapping("/create")
     public Mono<ResponseEntity<Map<String, Object>>> createInventory(@RequestBody Inventory inventory) {
@@ -103,6 +105,11 @@ public class InventoryController {
             @RequestBody StockAvailabilityRequestDTO request) {
 
         return getStockAvailabilityUseCase.getStockAvailability(request);
+    }
+
+    @GetMapping("/warehouses")
+    public Flux<Warehouse> getWarehouses(){
+        return getWarehouseUseCase.getWarehouses();
     }
 
     @GetMapping("/healthz")

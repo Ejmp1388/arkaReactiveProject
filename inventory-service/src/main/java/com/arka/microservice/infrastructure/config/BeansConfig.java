@@ -3,6 +3,7 @@ package com.arka.microservice.infrastructure.config;
 import com.arka.microservice.application.usecase.*;
 import com.arka.microservice.domain.port.InventoryRepositoryPort;
 import com.arka.microservice.domain.port.ProductClientPort;
+import com.arka.microservice.domain.port.WarehouseRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +41,11 @@ public class BeansConfig {
     @Bean
     public GetStockAvailabilityUseCase getStockAvailabilityUseCase(InventoryRepositoryPort port){
         return new GetStockAvailabilityUseCase(port);
+    }
+
+    @Bean
+    public GetWarehouseUseCase getWarehouseUseCase(WarehouseRepositoryPort port){
+        return new GetWarehouseUseCase(port);
     }
 
     @Bean
