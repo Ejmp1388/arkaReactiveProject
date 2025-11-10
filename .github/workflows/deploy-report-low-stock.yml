@@ -50,4 +50,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/reporte-service:latest
           docker stop reporte-service || true
           docker rm reporte-service || true
-          docker run -d --name reporte-service -p 8090:8090 ${{ secrets.DOCKER_USERNAME }}/reporte-service:latest
+          docker run -d --name reporte-service -e ACCESS_KEY: ${{ secrets.ACCESS_KEY_S }} -e SECRET_KEY: ${{ secrets.SECRET_KEY_S }} -p 8090:8090 ${{ secrets.DOCKER_USERNAME }}/reporte-service:latest
