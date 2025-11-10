@@ -25,9 +25,9 @@ public class InventoryReportScheduler {
     @Value("${cloud.aws.s3.bucket.name}")
     private String bucketName;
 
-    @Scheduled(fixedRateString = "#{@reportProperties.interval}")
+    //@Scheduled(fixedRateString = "#{@reportProperties.interval}")
     // Ejecuta cada 1 días (configurable con reportProperties.weeklyCron)
-    //@Scheduled(cron = "${reportProperties.weeklyCron}")
+    @Scheduled(cron = "${reportProperties.weeklyCron}")
     public void generateCsvReport() {
         inventoryService.getLowStockItems()
                 .collectList()
