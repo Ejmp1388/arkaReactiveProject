@@ -1,0 +1,30 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: shopcart-service
+
+  r2dbc:
+    url: r2dbc:postgresql://database-1.ckbmcaom0bdy.us-east-1.rds.amazonaws.com:5432/arka?sslmode=require
+    username: postgres
+    password: dbAdm0925
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 20
+
+  sql:
+    init:
+      mode: never
+
+logging:
+  level:
+    org.springframework.r2dbc: INFO
+    org.springframework.data.r2dbc: INFO
+
+app:
+  orders:
+    base-url: http://alb-if-arka-1265771644.us-east-1.elb.amazonaws.com
+
+
